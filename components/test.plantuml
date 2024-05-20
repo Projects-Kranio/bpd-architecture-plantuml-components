@@ -1,0 +1,16 @@
+@startuml
+    !define Foo https://raw.githubusercontent.com/Projects-Kranio/bpd-architecture-plantuml-components/main/components/general
+    !define C4Puml https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master
+
+    !includeurl Foo/foo.puml
+    !includeurl C4Puml/C4_Context.puml
+    !includeurl C4Puml/C4_Component.puml
+    !includeurl C4Puml/C4_Container.puml
+
+    'left to right direction
+
+    title Example Multi Cloud PlantUML C4 Diagram
+
+    Alice -> Bob : <$foo{scale=3,color=blue}>
+    foo(id, "", "")
+@enduml
