@@ -3,7 +3,7 @@
 
 ' Colors
 ' ##################################
-!define AZURE_COLOR #0072C6
+!define AZURE_COLOR #c60043
 !define AZURE_BG_COLOR #FFFFFF
 !define AZURE_BORDER_COLOR #3C7FC0
 !define AZURE_SYMBOL_COLOR AZURE_COLOR
