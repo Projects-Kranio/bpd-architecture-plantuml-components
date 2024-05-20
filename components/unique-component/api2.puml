@@ -1,1 +1,3 @@
 sprite $api [../assets/image/png/api.png]
+
+sprite $localAPI 
