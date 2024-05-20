@@ -1,0 +1,3 @@
+@startuml
+    Alice -> Bob : Testing <$foo{scale=3,color=blue}>
+@enduml
