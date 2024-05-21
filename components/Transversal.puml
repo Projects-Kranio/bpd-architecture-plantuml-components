@@ -10,14 +10,16 @@
 !includeurl C4Puml/C4_Component.puml
 !includeurl C4Puml/C4_Container.puml
 
-Boundary(userCard, "") {
-  foo(id, "test", "test", "", "#0072C6")
-}
+!definelong Transversal()
+    Boundary(tr_1, "") {
+    foo(id_tr_1, "test", "test", "", "#0072C6")
+    }
 
-Boundary(card, "") {
-  foo(id2, "test", "test", "desc")
-}
+    Boundary(tr_2, "") {
+    foo(id_tr_2, "test", "test", "desc")
+    }
 
-Rel_R(id, id2, "")
+    Rel_R(id_tr_1, id_tr_2, "")
+!enddefinelong
 
 @enduml
