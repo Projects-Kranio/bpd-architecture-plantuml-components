@@ -1,0 +1,23 @@
+@startuml
+
+!define BPD https://raw.githubusercontent.com/Projects-Kranio/bpd-architecture-plantuml-components/main/components
+!define C4Puml https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master
+
+!includeurl BPD/general/foo.puml
+!includeurl BPD/general/api.puml
+!includeurl BPD/AzureCommon.puml
+!includeurl C4Puml/C4_Context.puml
+!includeurl C4Puml/C4_Component.puml
+!includeurl C4Puml/C4_Container.puml
+
+Boundary(userCard, "") {
+  foo(id, "test", "test", "", "#0072C6")
+}
+
+Boundary(card, "") {
+  foo(id2, "test", "test", "desc")
+}
+
+Rel_R(id, id2, "")
+
+@enduml
