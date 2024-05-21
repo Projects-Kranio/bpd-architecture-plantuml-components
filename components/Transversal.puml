@@ -11,13 +11,8 @@
     !includeurl C4Puml/C4_Component.puml
     !includeurl C4Puml/C4_Container.puml
 
-    Boundary(tr_1, "") {
-        foo(id_tr_1, "API 1", "ms-api-1", "", "#6ae515")
-    }
-
-    Boundary(tr_2, "") {
-        foo(id_tr_2, "API 2", "ms-api-2", "", "#6ae515")
-    }
+    foo(id_tr_1, "API 1", "ms-api-1", "", "#6ae515")
+    foo(id_tr_2, "API 2", "ms-api-2")
 
     Rel_R(id_tr_2, id_tr_1, "")
 !enddefinelong
