@@ -12,14 +12,14 @@
     !includeurl C4Puml/C4_Container.puml
 
     Boundary(tr_1, "") {
-        foo(id_tr_1, "test", "test", "", "#0072C6")
+        foo(id_tr_1, "API 1", "ms-api-1", "", "#6ae515")
     }
 
     Boundary(tr_2, "") {
-        foo(id_tr_2, "test", "test", "desc")
+        foo(id_tr_2, "API 2", "ms-api-2", "", "#6ae515")
     }
 
-    Rel_R(id_tr_1, id_tr_2, "")
+    Rel_R(id_tr_2, id_tr_1, "")
 !enddefinelong
 
 @enduml
