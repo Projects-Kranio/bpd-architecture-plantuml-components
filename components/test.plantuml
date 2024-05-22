@@ -1,15 +1,66 @@
-@startuml
-    ' !define BPD https://raw.githubusercontent.com/Projects-Kranio/bpd-architecture-plantuml-components/main/components
+' @startuml
+'     ' !define BPD https://raw.githubusercontent.com/Projects-Kranio/bpd-architecture-plantuml-components/main/components
 
-    !define BPD ./components
+'     !define BPD ./components
 
-    !includeurl BPD/general/foo.puml
-    !includeurl BPD/AzureCommon.puml
+'     !includeurl BPD/general/foo.puml
+'     !includeurl BPD/AzureCommon.puml
 
-    'left to right direction
+'     'left to right direction
 
-    title Example Multi Cloud PlantUML C4 Diagram
+'     title Example Multi Cloud PlantUML C4 Diagram
 
-    Alice -> Bob : <$foo{scale=3,color=blue}>
-    ' foo(id, "", "")
+'     'Alice -> Bob : <$foo{scale=3,color=blue}>
+'     foo(id, "", "")
+' @enduml
+
+@startuml diagram_test
+
+!define BPD https://raw.githubusercontent.com/Projects-Kranio/bpd-architecture-plantuml-components/main/components
+!define C4Puml https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master
+
+!includeurl BPD/general/foo.puml
+!includeurl BPD/general/api.puml
+!includeurl BPD/AzureCommon.puml
+!includeurl BPD/Transversal.puml
+!includeurl C4Puml/C4_Context.puml
+!includeurl C4Puml/C4_Component.puml
+!includeurl C4Puml/C4_Container.puml
+
+'left to right direction
+'top to bottom direction
+
+skinparam shadowing false
+skinparam rectangle {
+    roundCorner 5
+    BackgroundColor white
+    BorderColor #3C7FC0
+}
+
+title Example  Components
+
+Boundary(lvl1, "") {
+  Boundary(tr, "Transversal") {
+    Transversal()
+  }
+
+  Boundary(lvl2, "") {
+    Boundary(card2, "") {
+      api(id3, "test", "test")
+    }
+
+    Boundary(userCard, "") {
+      foo(id, "test", "test", "", "#0072C6")
+    }
+
+    Boundary(card, "") {
+      foo(id2, "test", "test","desc")
+    }
+  }
+}
+
+
+Rel_R(id, id2, "")
+Rel_R(id3, tr, "")
+
 @enduml
