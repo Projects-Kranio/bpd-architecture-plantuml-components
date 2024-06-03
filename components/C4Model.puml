@@ -1,5 +1,7 @@
 @startuml
 
+!$BOUNDARY_DESCR_MAX_CHAR_WIDTH ?= 35
+
 !function $getLink($link)
   !if ($link != "")
     !return "[[" + $link + "]]"
