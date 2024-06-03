@@ -1,7 +1,19 @@
 @startuml
 
 !$BOUNDARY_DESCR_MAX_CHAR_WIDTH ?= 35
+
 !$TECHN_FONT_SIZE ?= 12
+!$STEREOTYPE_FONT_SIZE ?= 12
+!global $TRANSPARENT_STEREOTYPE_FONT_SIZE = $STEREOTYPE_FONT_SIZE/2
+
+!$BOUNDARY_BG_COLOR ?= "transparent"
+!$BOUNDARY_BORDER_STYLE ?= "dashed"
+
+skinparam rectangle<<boundary>> {
+    StereotypeFontSize $TRANSPARENT_STEREOTYPE_FONT_SIZE
+    StereotypeFontColor $BOUNDARY_BG_COLOR
+    BorderStyle $BOUNDARY_BORDER_STYLE
+}
 
 !function $getLink($link)
   !if ($link != "")
