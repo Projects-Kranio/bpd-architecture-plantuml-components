@@ -8,11 +8,13 @@
 
 !$BOUNDARY_BG_COLOR ?= "transparent"
 !$BOUNDARY_BORDER_STYLE ?= "dashed"
+!$BOUNDARY_BORDER_COLOR ?= "#444444"
 
 skinparam rectangle<<boundary>> {
     StereotypeFontSize $TRANSPARENT_STEREOTYPE_FONT_SIZE
     StereotypeFontColor $BOUNDARY_BG_COLOR
     BorderStyle $BOUNDARY_BORDER_STYLE
+    BorderColor $BOUNDARY_BORDER_COLOR
 }
 
 !function $getLink($link)
