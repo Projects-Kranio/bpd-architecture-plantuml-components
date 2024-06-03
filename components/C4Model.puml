@@ -1,0 +1,90 @@
+@startuml
+
+!function $getLink($link)
+  !if ($link != "")
+    !return "[[" + $link + "]]"
+  !else
+    !return ""
+  !endif
+!endfunction
+
+!unquoted function $breakText($text, $usedNewLine, $widthStr="-1")
+!$width = %intval($widthStr)
+!$multiLine = ""
+!if (%strpos($text, "\n") >= 0)
+  !while (%strpos($text, "\n") >= 0)
+    !$brPos = %strpos($text, "\n")
+    !if ($brPos > 0)
+      !$multiLine = $multiLine + %substr($text, 0, $brPos) + $usedNewLine
+    !else
+      ' <U+00A0> non breaking change that newLine breaks with formats can be used with \n\n 
+      !$multiLine = $multiLine + "<U+00A0>" + $usedNewLine
+    !endif
+    !$text = %substr($text, $brPos+2)
+    !if (%strlen($text) == 0)
+      !$text = "<U+00A0>"
+    !endif
+  !endwhile
+!else
+  !while ($width>0 && %strlen($text) > $width)
+    !$brPos = $width
+    !while ($brPos > 0 && %substr($text, $brPos, 1) != ' ')
+      !$brPos = $brPos - 1
+    !endwhile
+
+    !if ($brPos < 1)
+      !$brPos = %strpos($text, " ")
+    !else
+    !endif
+
+    !if ($brPos > 0)
+      !$multiLine = $multiLine + %substr($text, 0, $brPos) + $usedNewLine
+      !$text = %substr($text, $brPos + 1)
+    !else
+      !$multiLine = $multiLine+ $text
+      !$text = ""
+    !endif
+  !endwhile
+!endif
+!if (%strlen($text) > 0)
+  !$multiLine = $multiLine + $text
+!endif
+!return $multiLine
+!endfunction
+
+!unquoted function $breakLabel($text)
+!$usedNewLine = "\n== "
+!$multiLine = $breakText($text, $usedNewLine)
+!return $multiLine
+!endfunction
+
+!unquoted function $breakDescr($text, $widthStr)
+  !$usedNewLine = "\n"
+  !return $breakText($text, $usedNewLine, $widthStr)
+!endfunction
+
+' ------------------------------------------------------------------
+' ------------------------------ CARD ------------------------------
+' ------------------------------------------------------------------
+
+!function $getBoundary($label, $sub_title, $descr)
+  !$line = '== '
+  !$line = $line + $breakLabel($label)
+  !if ($sub_title != "")
+    !$line = $line + '\n<size:' + $TECHN_FONT_SIZE + '>[' + $sub_title + ']</size>'
+  !endif
+  !if ($descr != "")
+    !$line = $line + '\n\n' + $breakDescr($descr, $BOUNDARY_DESCR_MAX_CHAR_WIDTH)
+  !endif
+  !return $line
+!endfunction
+
+!unquoted procedure Boundary($alias, $label, $sub_title="", $descr="", $link="")
+rectangle "$getBoundary($label, sub_title, $descr)" as $alias $getLink($link)
+!endprocedure
+
+' ------------------------------------------------------------------
+' ------------------------------ LINE ------------------------------
+' ------------------------------------------------------------------
+
+@enduml
