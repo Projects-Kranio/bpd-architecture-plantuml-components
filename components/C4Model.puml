@@ -93,7 +93,7 @@ skinparam rectangle<<boundary>> {
   !if ($descr != "")
     !$line = $line + '\n\n' + $breakDescr($descr, $BOUNDARY_DESCR_MAX_CHAR_WIDTH)
   !endif
-  !return $line
+  !return $line + " <<boundary>> "
 !endfunction
 
 !unquoted procedure Boundary($alias, $label, $sub_title="", $descr="", $link="")
