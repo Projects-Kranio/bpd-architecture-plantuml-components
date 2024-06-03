@@ -80,7 +80,7 @@
 !endfunction
 
 !unquoted procedure Boundary($alias, $label, $sub_title="", $descr="", $link="")
-rectangle "$getBoundary($label, sub_title, $descr)" as $alias $getLink($link)
+rectangle "$getBoundary($label, $sub_title, $descr)" as $alias $getLink($link)
 !endprocedure
 
 ' ------------------------------------------------------------------
