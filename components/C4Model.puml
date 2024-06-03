@@ -1,6 +1,7 @@
 @startuml
 
 !$BOUNDARY_DESCR_MAX_CHAR_WIDTH ?= 35
+!$TECHN_FONT_SIZE ?= 12
 
 !function $getLink($link)
   !if ($link != "")
