@@ -5,17 +5,17 @@
 !define DIRECTION_DOWN DOWN
 !define DIRECTION_UP UP
 
-!define LINE_TIP_TYPE_ARROW ">"
-!define LINE_TIP_TYPE_BIG_ARROW "|>"
-!define LINE_TIP_TYPE_ASTERISK "*"
-!define LINE_TIP_TYPE_CIRCLE "o"
+!define LINE_TIP_TYPE_ARROW >
+!define LINE_TIP_TYPE_BIG_ARROW |>
+!define LINE_TIP_TYPE_ASTERISK *
+!define LINE_TIP_TYPE_CIRCLE o
 !define LINE_TIP_TYPE_NONE ""
-!define LINE_TIP_TYPE_JUNK "#"
-!define LINE_TIP_TYPE_X "x"
-!define LINE_TIP_TYPE_KEYS "}"
-!define LINE_TIP_TYPE_PLUS "+"
-!define LINE_TIP_TYPE_ARROW_LEFT "<"
-!define LINE_TIP_TYPE_BIG_ARROW_LEFT "<|"
+!define LINE_TIP_TYPE_JUNK #
+!define LINE_TIP_TYPE_X x
+!define LINE_TIP_TYPE_KEYS }
+!define LINE_TIP_TYPE_PLUS +
+!define LINE_TIP_TYPE_ARROW_LEFT <
+!define LINE_TIP_TYPE_BIG_ARROW_LEFT <|
 
 !define LINE_TYPE_SOLID plain
 !define LINE_TYPE_DASHED dashed
