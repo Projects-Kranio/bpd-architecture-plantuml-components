@@ -213,8 +213,9 @@ rectangle "$getBoundary($label, $sub_title, $descr)" <<boundary>> as $alias $get
 !endfunction
 
 !unquoted procedure Line($from, $to, $label, $techn="", $descr="", $sprite="", $tags="", $link="", $index="")
-!$pre = $getPrefix($index)
-$getRel("-->>", $from, $to, $pre + $label, $techn, $descr, $sprite, $tags, $link)
+'!$pre = $getPrefix($index)
+'$pre + $label
+$getRel("-->>", $from, $to, $label, $techn, $descr, $sprite, $tags, $link)
 !endprocedure
 
 @enduml
