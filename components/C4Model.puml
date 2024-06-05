@@ -15,10 +15,10 @@
 !$BOUNDARY_BORDER_COLOR ?= "#444444"
 
 skinparam rectangle<<boundary>> {
-    StereotypeFontSize $TRANSPARENT_STEREOTYPE_FONT_SIZE
-    StereotypeFontColor $BOUNDARY_BG_COLOR
-    BorderStyle $BOUNDARY_BORDER_STYLE
-    BorderColor $BOUNDARY_BORDER_COLOR
+  StereotypeFontSize $TRANSPARENT_STEREOTYPE_FONT_SIZE
+  StereotypeFontColor $BOUNDARY_BG_COLOR
+  BorderStyle $BOUNDARY_BORDER_STYLE
+  BorderColor $BOUNDARY_BORDER_COLOR
 }
 
 !function $getLink($link)
@@ -137,12 +137,16 @@ rectangle "$getBoundary($label, $sub_title, $descr)" <<boundary>> as $alias $get
     !endif
   !endif
 
-  !$result = $defaultTipLineFrom + '-[' + $color +','+ $typeLine +',thickness='+ $size +']'+ $direction +'-'+ $tipLineTo
+  !if ($defaultTipLineFrom == "")
+    !$result = '-[' + $color +','+ $typeLine +',thickness='+ $size +']'+ $direction +'-'+ $tipLineTo
+  !else
+    !$result = $defaultTipLineFrom + '-[' + $color +','+ $typeLine +',thickness='+ $size +']'+ $direction +'-'+ $tipLineTo
+  !endif
 
   !return $result
 !endfunction
 
-!unquoted procedure Line($from, $to, $label, $direction=$DEFAULT_DIRECTION, $bidirectional=false, $labelFrom="", $labelTo="", $tipLineFrom=$DEFAULT_TIP_LINE_FROM, $tipLineTo=$DEFAULT_TIP_LINE_TO, $typeLine=$DEFAULT_TYPE_LINE, $color=$COLOR_DEFAULT_LINE, $size=$LINE_SIZE_DEFAULT)
+!unquoted procedure Line($from, $to, $label="", $direction=$DEFAULT_DIRECTION, $bidirectional=false, $labelFrom="", $labelTo="", $tipLineFrom=$DEFAULT_TIP_LINE_FROM, $tipLineTo=$DEFAULT_TIP_LINE_TO, $typeLine=$DEFAULT_TYPE_LINE, $color=$COLOR_DEFAULT_LINE, $size=$LINE_SIZE_DEFAULT)
 !$preDirection = $getDirection($tipLineFrom, $tipLineTo, $bidirectional, $typeLine, $color, $size, $direction)
 $getRel($preDirection, $from, $to, $label, $labelFrom, $labelTo)
 !endprocedure
