@@ -1,5 +1,9 @@
 @startuml
 
+!define BPD https://raw.githubusercontent.com/Projects-Kranio/bpd-architecture-plantuml-components/main/components
+
+!includeurl BPD/Variables.puml
+
 !$BOUNDARY_DESCR_MAX_CHAR_WIDTH ?= 35
 
 !$TECHN_FONT_SIZE ?= 12
@@ -103,5 +107,114 @@ rectangle "$getBoundary($label, $sub_title, $descr)" <<boundary>> as $alias $get
 ' ------------------------------------------------------------------
 ' ------------------------------ LINE ------------------------------
 ' ------------------------------------------------------------------
+
+!$LINE_TYPE_SOLID = plain
+!$LINE_TYPE_DASHED = dashed
+!$LINE_TYPE_DOTTED = dotted
+
+!$LINE_TIP_TYPE_ARROW = ">"
+!$LINE_TIP_TYPE_BIG_ARROW = "|>"
+!$LINE_TIP_TYPE_ASTERISK = "*"
+!$LINE_TIP_TYPE_CIRCLE = "o"
+!$LINE_TIP_TYPE_NONE = ""
+!$LINE_TIP_TYPE_JUNK = "#"
+!$LINE_TIP_TYPE_X = "x"
+!$LINE_TIP_TYPE_KEYS = "}"
+!$LINE_TIP_TYPE_PLUS = "+"
+
+!$LINE_TIP_TYPE_ARROW_LEFT = "<"
+!$LINE_TIP_TYPE_BIG_ARROW_LEFT = "<|"
+
+!$LINE_SIZE_SMALL = 1
+!$LINE_SIZE_MEDIUM = 2
+!$LINE_SIZE_LARGE = 4
+!$LINE_SIZE_DEFAULT = $LINE_SIZE_SMALL
+
+!$LINE_DIRECTION_RIGHT = RIGHT
+!$LINE_DIRECTION_LEFT = LEFT
+!$LINE_DIRECTION_DOWN = DOWN
+!$LINE_DIRECTION_UP = UP
+
+!$REL_TECHN_MAX_CHAR_WIDTH ?= 35
+!$REL_DESCR_MAX_CHAR_WIDTH ?= 32
+
+!$COLOR_DEFAULT_LINE = COLOR_GRAY
+
+!$lastIndex = 0
+!$index = 1
+
+!function Index($offset=1)
+  !$lastIndex = $index
+  !$index = $lastIndex + $offset
+  !return $lastIndex
+!endfunction
+
+!unquoted function $getPrefix($index)
+  !if ($index == "")
+    !$pre = Index() + ": "
+  !else
+    !$pre = $index + ": "
+  !endif
+  !return $pre
+!endfunction
+
+!function $getRel($direction, $alias1, $alias2, $label, $techn, $descr, $sprite, $tags, $link)
+  !$sprite = $toRelArg($sprite, $tags, "RelTagSprite")
+  !$techn = $toRelArg($techn, $tags, "RelTagTechn")
+  !$rel = $alias1 + ' ' + $direction + ' ' + $alias2
+  !if ($tags != "")
+    !$rel = $rel + ' ' + $toStereos($tags)
+  !endif
+  !$rel = $rel + ' : '
+  !if ($link != "")
+    !$rel = $rel + '**[[' + $link + ' '
+  !endif
+  !if ($sprite != "")
+    !$rel = $rel + $getSprite($sprite)
+    !if ($label != "")
+      !$rel = $rel + ' '
+    !endif
+  !endif
+  !if ($link != "")
+    !$usedNewLine = ']]**\n**[[' + $link + ' '
+    ' if sprite and label is empty than the link url is shown (otherwise link cannot be activated at all)
+    !$rel = $rel + $breakText($label, $usedNewLine) + ']]**'
+  !else
+    !if ($label != "")
+      !$usedNewLine = '**\n**'
+      !$rel = $rel + '**' + $breakText($label, $usedNewLine) + '**'
+    !else
+      !$rel = $rel + '<size:0>.</size>'
+    !endif
+  !endif
+  !if ($techn != "")
+    ' line break is not deterministic, calculate it
+    !$rel = $rel + '\n//<size:' + $TECHN_FONT_SIZE + '>[' + $breakTechn($techn, $REL_TECHN_MAX_CHAR_WIDTH) + ']</size>//'
+  !endif
+  !if ($descr != "")
+    ' line break is not deterministic, calculate it
+    !$rel = $rel + '\n\n' + $breakDescr($descr, $REL_DESCR_MAX_CHAR_WIDTH)
+  !endif
+  !$prop = $getProps()
+  !if ($prop != "")
+    ' reuse table
+    !$rel = $rel + $prop
+  !endif
+  !return $rel
+!endfunction
+
+!unquoted function $getDirection($index, $tipLineFrom, $tipLineTo, $bidirectional=false, $typeLine=$LINE_TYPE_SOLID, $color=$COLOR_DEFAULT_LINE, $size=$LINE_SIZE_DEFAULT, $direction=$LINE_DIRECTION_RIGHT)
+  !if ($index == "")
+    !$pre = Index() + ": "
+  !else
+    !$pre = $index + ": "
+  !endif
+  !return $pre
+!endfunction
+
+!unquoted procedure Line($from, $to, $label, $techn="", $descr="", $sprite="", $tags="", $link="", $index="")
+!$pre = $getPrefix($index)
+$getRel("-->>", $from, $to, $pre + $label, $techn, $descr, $sprite, $tags, $link)
+!endprocedure
 
 @enduml
