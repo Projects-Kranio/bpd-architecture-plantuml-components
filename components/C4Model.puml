@@ -138,7 +138,12 @@ rectangle "$getBoundary($label, $sub_title, $descr)" <<boundary>> as $alias $get
 !$COLOR_DEFAULT_LINE = COLOR_GRAY
 
 !function $getRel($direction, $alias1, $alias2, $label, $labelFrom, $labelTo)
-  !$rel = $alias1 + ' ' + "$labelFrom" + ' ' + $direction + ' ' + "$labelTo" + ' ' + $alias2 : $label
+  !$rel = $alias1 + ' ' + $direction + ' ' + $alias2
+  
+  !if ($label != "")
+    !$rel = $rel + ' : ' + $label
+  !endif
+  
   !return $rel
 !endfunction
 
@@ -154,12 +159,12 @@ rectangle "$getBoundary($label, $sub_title, $descr)" <<boundary>> as $alias $get
     !endif
   !endif
 
-  !$result = $defaultTipLineFrom-[$color,$typeLine,thickness=$size]$direction-$tipLineTo
+  !$result = $defaultTipLineFrom + '-[' + $color +','+ $typeLine +',thickness='+ $size +']'+ $direction +'-'+ $tipLineTo
 
   !return $result
 !endfunction
 
-!unquoted procedure Line($from, $to, $label, $direction=$LINE_DIRECTION_RIGHT, $bidirectional=false, $labelFrom="", $labelTo="", $typeLine=$LINE_TYPE_SOLID, $color=$COLOR_DEFAULT_LINE, $size=$LINE_SIZE_DEFAULT)
+!unquoted procedure Line($from, $to, $label, $direction=$LINE_DIRECTION_RIGHT, $bidirectional=false, $labelFrom="", $labelTo="", $tipLineFrom=$LINE_TIP_TYPE_NONE, $tipLineTo=$LINE_TIP_TYPE_ARROW, $typeLine=$LINE_TYPE_SOLID, $color=$COLOR_DEFAULT_LINE, $size=$LINE_SIZE_DEFAULT)
 !$preDirection = $getDirection($tipLineFrom, $tipLineTo, $bidirectional, $typeLine, $color, $size, $direction)
 $getRel($preDirection, $from, $to, $label, $labelFrom, $labelTo)
 !endprocedure
