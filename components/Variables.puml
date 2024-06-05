@@ -1,1 +1,3 @@
 !define COLOR_GRAY #c60043
+
+!define DIRECTION_DOWN DOWN
