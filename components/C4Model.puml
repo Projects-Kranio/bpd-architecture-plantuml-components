@@ -11,7 +11,7 @@
 !global $TRANSPARENT_STEREOTYPE_FONT_SIZE = $STEREOTYPE_FONT_SIZE/2
 
 !$BOUNDARY_BG_COLOR ?= "transparent"
-!$BOUNDARY_BORDER_STYLE ?= "dashed"
+!$BOUNDARY_BORDER_STYLE ?= LINE_TYPE_DASHED
 !$BOUNDARY_BORDER_COLOR ?= "#444444"
 
 skinparam rectangle<<boundary>> {
@@ -108,34 +108,9 @@ rectangle "$getBoundary($label, $sub_title, $descr)" <<boundary>> as $alias $get
 ' ------------------------------ LINE ------------------------------
 ' ------------------------------------------------------------------
 
-!$LINE_TYPE_SOLID = plain
-!$LINE_TYPE_DASHED = dashed
-!$LINE_TYPE_DOTTED = dotted
-
-!$LINE_TIP_TYPE_ARROW = ">"
-!$LINE_TIP_TYPE_BIG_ARROW = "|>"
-!$LINE_TIP_TYPE_ASTERISK = "*"
-!$LINE_TIP_TYPE_CIRCLE = "o"
-!$LINE_TIP_TYPE_NONE = ""
-!$LINE_TIP_TYPE_JUNK = "#"
-!$LINE_TIP_TYPE_X = "x"
-!$LINE_TIP_TYPE_KEYS = "}"
-!$LINE_TIP_TYPE_PLUS = "+"
-
-!$LINE_TIP_TYPE_ARROW_LEFT = "<"
-!$LINE_TIP_TYPE_BIG_ARROW_LEFT = "<|"
-
-!$LINE_SIZE_SMALL = 1
-!$LINE_SIZE_MEDIUM = 2
-!$LINE_SIZE_LARGE = 4
-!$LINE_SIZE_DEFAULT = $LINE_SIZE_SMALL
-
-!$LINE_DIRECTION_RIGHT = RIGHT
-!$LINE_DIRECTION_LEFT = LEFT
-!$LINE_DIRECTION_DOWN = DOWN
-!$LINE_DIRECTION_UP = UP
-
+!$LINE_SIZE_DEFAULT = LINE_SIZE_SMALL
 !$COLOR_DEFAULT_LINE = COLOR_GRAY
+!$DEFAULT_DIRECTION = DIRECTION_RIGHT
 
 !function $getRel($direction, $alias1, $alias2, $label, $labelFrom, $labelTo)
   !$rel = $alias1 + ' ' + $direction + ' ' + $alias2
@@ -164,7 +139,7 @@ rectangle "$getBoundary($label, $sub_title, $descr)" <<boundary>> as $alias $get
   !return $result
 !endfunction
 
-!unquoted procedure Line($from, $to, $label, $direction=$LINE_DIRECTION_RIGHT, $bidirectional=false, $labelFrom="", $labelTo="", $tipLineFrom=$LINE_TIP_TYPE_NONE, $tipLineTo=$LINE_TIP_TYPE_ARROW, $typeLine=$LINE_TYPE_SOLID, $color=$COLOR_DEFAULT_LINE, $size=$LINE_SIZE_DEFAULT)
+!unquoted procedure Line($from, $to, $label, $direction=$DEFAULT_DIRECTION, $bidirectional=false, $labelFrom="", $labelTo="", $tipLineFrom=LINE_TIP_TYPE_NONE, $tipLineTo=LINE_TIP_TYPE_ARROW, $typeLine=LINE_TYPE_SOLID, $color=$COLOR_DEFAULT_LINE, $size=$LINE_SIZE_DEFAULT)
 !$preDirection = $getDirection($tipLineFrom, $tipLineTo, $bidirectional, $typeLine, $color, $size, $direction)
 $getRel($preDirection, $from, $to, $label, $labelFrom, $labelTo)
 !endprocedure
