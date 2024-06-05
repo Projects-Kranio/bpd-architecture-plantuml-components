@@ -17,50 +17,91 @@
 @startuml diagram_test
 
 !define BPD https://raw.githubusercontent.com/Projects-Kranio/bpd-architecture-plantuml-components/main/components
-!define C4Puml https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master
+'!define C4Puml https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master
 
 !includeurl BPD/general/foo.puml
 !includeurl BPD/general/api.puml
 !includeurl BPD/AzureCommon.puml
 !includeurl BPD/Transversal.puml
-!includeurl C4Puml/C4_Context.puml
-!includeurl C4Puml/C4_Component.puml
-!includeurl C4Puml/C4_Container.puml
+
+!includeurl BPD/C4Model.puml
+
+'!includeurl C4Puml/C4_Context.puml
+'!includeurl C4Puml/C4_Component.puml
+'!includeurl C4Puml/C4_Container.puml
 
 'left to right direction
 'top to bottom direction
 
 skinparam shadowing false
-skinparam rectangle {
-    roundCorner 5
-    BackgroundColor white
-    BorderColor #3C7FC0
-}
+' skinparam rectangle {
+'     roundCorner 5
+'     BackgroundColor white
+'     BorderColor #3C7FC0
+' }
 
-title Example  Components
+title Example Components
 
-Boundary(lvl1, "") {
-  Boundary(tr, "Transversal") {
-    Transversal()
-  }
+Boundary(test1, "Openshift test1", "10.0.0.3", "desc")
+Boundary(test2, "Openshift test2", "10.0.0.3", "desc")
+test1 -[#0000FF]RIGHT-> test2
 
-  Boundary(lvl2, "") {
-    Boundary(card2, "") {
-      api(id3, "test", "test")
-    }
+rectangle "==Test Rectangle" <<boundary>> as UC1
+UC1 -[#0000FF]LEFT->Bob : ok
 
-    Boundary(userCard, "") {
-      foo(id, "test", "test", "", "#0072C6")
-    }
+!$LINE_TYPE_SOLID = plain
+!$LINE_TYPE_DASHED = dashed
+!$LINE_TYPE_DOTTED = dotted
 
-    Boundary(card, "") {
-      foo(id2, "test", "test","desc")
-    }
-  }
-}
+!$LINE_TIP_TYPE_ARROW = ">"
+!$LINE_TIP_TYPE_BIG_ARROW = "|>"
+!$LINE_TIP_TYPE_ASTERISK = "*"
+!$LINE_TIP_TYPE_CIRCLE = "o"
+!$LINE_TIP_TYPE_NONE = ""
+!$LINE_TIP_TYPE_JUNK = "#"
+!$LINE_TIP_TYPE_X = "x"
+!$LINE_TIP_TYPE_KEYS = "}"
+!$LINE_TIP_TYPE_PLUS = "+"
+
+!$LINE_TIP_TYPE_ARROW_LEFT = "<"
+!$LINE_TIP_TYPE_BIG_ARROW_LEFT = "<|"
+
+!$LINE_SIZE_SMALL = 1
+!$LINE_SIZE_MEDIUM = 2
+!$LINE_SIZE_LARGE = 4
+!$LINE_SIZE_DEFAULT = $LINE_SIZE_SMALL
+
+!$LINE_DIRECTION_RIGHT = RIGHT
+!$LINE_DIRECTION_LEFT = LEFT
+!$LINE_DIRECTION_DOWN = DOWN
+!$LINE_DIRECTION_UP = UP
 
 
-Rel_R(id, id2, "")
-Rel_R(id3, tr, "")
+foo "01  " $LINE_TIP_TYPE_NONE-[AZURE_COLOR,$LINE_TYPE_SOLID,thickness=$LINE_SIZE_SMALL]$LINE_DIRECTION_RIGHT-$LINE_TIP_TYPE_ARROW "  02" bar2 : label
+
+' Boundary(lvl1, "Openshift Interno", "10.0.0.3") {
+'   Boundary(tr, "Transversal") {
+'     Transversal()
+'   }
+
+'   Boundary(lvl2, "") {
+'     Boundary(card2, "") {
+'       api(id3, "test", "test", ?e_descr="test desc")
+'     }
+
+'     Boundary(userCard, "Test", "test2") {
+'       foo(id, "", "test", "", "#0072C6")
+'     }
+
+'     Boundary(card, "") {
+'       foo(id2, "test", "test","desc")
+'     }
+'   }
+' }
+
+'id3 -DOWN-> id_tr_2
+
+'Rel_R(id, id2, "")
+'Rel_D(id3, tr, "")
 
 @enduml
