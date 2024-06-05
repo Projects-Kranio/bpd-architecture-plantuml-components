@@ -1,3 +1,26 @@
 !define COLOR_GRAY #c60043
 
+!define DIRECTION_RIGHT RIGHT
+!define DIRECTION_LEFT LEFT
 !define DIRECTION_DOWN DOWN
+!define DIRECTION_UP UP
+
+!define LINE_TIP_TYPE_ARROW ">"
+!define LINE_TIP_TYPE_BIG_ARROW "|>"
+!define LINE_TIP_TYPE_ASTERISK "*"
+!define LINE_TIP_TYPE_CIRCLE "o"
+!define LINE_TIP_TYPE_NONE ""
+!define LINE_TIP_TYPE_JUNK "#"
+!define LINE_TIP_TYPE_X "x"
+!define LINE_TIP_TYPE_KEYS "}"
+!define LINE_TIP_TYPE_PLUS "+"
+!define LINE_TIP_TYPE_ARROW_LEFT "<"
+!define LINE_TIP_TYPE_BIG_ARROW_LEFT "<|"
+
+!define LINE_TYPE_SOLID plain
+!define LINE_TYPE_DASHED dashed
+!define LINE_TYPE_DOTTED dotted
+
+!define LINE_SIZE_SMALL 1
+!define LINE_SIZE_MEDIUM 2
+!define LINE_SIZE_LARGE 4
