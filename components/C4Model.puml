@@ -108,6 +108,8 @@ rectangle "$getBoundary($label, $sub_title, $descr)" <<boundary>> as $alias $get
 ' ------------------------------ LINE ------------------------------
 ' ------------------------------------------------------------------
 
+!global $propTable = ""
+
 !$LINE_TYPE_SOLID = plain
 !$LINE_TYPE_DASHED = dashed
 !$LINE_TYPE_DOTTED = dotted
@@ -158,6 +160,77 @@ rectangle "$getBoundary($label, $sub_title, $descr)" <<boundary>> as $alias $get
   !return $pre
 !endfunction
 
+!unquoted function $toRelArg($arg, $tags, $varPostfix)
+  !if ($arg > "")
+    !return $arg
+  !endif
+
+  !if (%strlen($tags) == 0)
+       !return $arg
+  !endif
+  !$brPos = %strpos($tags, "+")
+  !while ($brPos >= 0)
+    !$tag = %substr($tags, 0, $brPos)
+    !$newArg = %get_variable_value("$" + $tag + $varPostfix)
+    !if ($newArg > "")
+       !return $newArg
+    !endif
+    !$tags = %substr($tags, $brPos+1)
+    !$brPos = %strpos($tags, "+")
+  !endwhile
+  !if (%strlen($tags) > 0)
+    !$newArg = %get_variable_value("$" + $tags + $varPostfix)
+    !if ($newArg > "")
+       !return $newArg
+    !endif
+  !endif
+  !return $arg
+!endfunction
+
+!unquoted function $toStereos($tags)
+  !if (%strlen($tags) == 0)
+    !return ''
+  !endif
+  !$stereos = ''
+  !$brPos = %strpos($tags, "+")
+  !while ($brPos >= 0)
+    !$tag = %substr($tags, 0, $brPos)
+    !$stereos = $stereos + '<<' + $tag + '>>'
+%set_variable_value("$" + $tag + "_LineLegend", %true())
+    !$tags = %substr($tags, $brPos+1)
+    !$brPos = %strpos($tags, "+")
+  !endwhile
+  !if (%strlen($tags) > 0)
+    !$stereos = $stereos + '<<' + $tags + '>>'
+%set_variable_value("$" + $tags + "_LineLegend", %true())
+  !endif
+  !return $stereos
+!endfunction
+
+!unquoted function $breakTechn($text, $widthStr)
+  !$usedNewLine = '</size>//\n//<size:'+$TECHN_FONT_SIZE+'>'
+  !return $breakText($text, $usedNewLine, $widthStr)
+!endfunction
+
+' format sprite that it can be used in diagram
+!function $getSprite($sprite)
+  !if (%substr($sprite, 0, 1) != "&" && %substr($sprite, 0, 4) != "img:")
+    !$formatted = "<$" + $sprite + ">"
+  !else
+    !$formatted = "<" + $sprite + ">"
+  !endif
+  !return $formatted
+!endfunction
+
+!unquoted function $getProps($alignedNL = "\n")
+  !if ($propTable != "")
+    !$retTable = $alignedNL + $propTable
+    !$propTable = ""
+    !return $retTable
+  !endif
+  !return ""
+!endfunction
+
 !function $getRel($direction, $alias1, $alias2, $label, $techn, $descr, $sprite, $tags, $link)
   !$sprite = $toRelArg($sprite, $tags, "RelTagSprite")
   !$techn = $toRelArg($techn, $tags, "RelTagTechn")
@@ -203,18 +276,22 @@ rectangle "$getBoundary($label, $sub_title, $descr)" <<boundary>> as $alias $get
   !return $rel
 !endfunction
 
-!unquoted function $getDirection($index, $tipLineFrom, $tipLineTo, $bidirectional=false, $typeLine=$LINE_TYPE_SOLID, $color=$COLOR_DEFAULT_LINE, $size=$LINE_SIZE_DEFAULT, $direction=$LINE_DIRECTION_RIGHT)
-  !if ($index == "")
-    !$pre = Index() + ": "
-  !else
-    !$pre = $index + ": "
-  !endif
-  !return $pre
-!endfunction
+' !unquoted function $getDirection($index, $tipLineFrom, $tipLineTo, $bidirectional=false, $typeLine=$LINE_TYPE_SOLID, $color=$COLOR_DEFAULT_LINE, $size=$LINE_SIZE_DEFAULT, $direction=$LINE_DIRECTION_RIGHT)
+'   !if ($index == "")
+'     !$pre = Index() + ": "
+'   !else
+'     !$pre = $index + ": "
+'   !endif
+'   !return $pre
+' !endfunction
 
-!unquoted procedure Line($from, $to, $label, $techn="", $descr="", $sprite="", $tags="", $link="", $index="")
+!unquoted procedure Line($from, $to, $label, $techn="", $descr="", $sprite="", $tags="", $link="")
 '!$pre = $getPrefix($index)
 '$pre + $label
+$getRel("-->>", $from, $to, $label, $techn, $descr, $sprite, $tags, $link)
+!endprocedure
+
+!unquoted procedure Rel_D($from, $to, $label, $techn="", $descr="", $sprite="", $tags="", $link="")
 $getRel("-->>", $from, $to, $label, $techn, $descr, $sprite, $tags, $link)
 !endprocedure
 
