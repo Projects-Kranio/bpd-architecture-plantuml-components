@@ -16,8 +16,11 @@
 
 @startuml diagram_test
 
-!define BPD https://raw.githubusercontent.com/Projects-Kranio/bpd-architecture-plantuml-components/main/components
-'!define C4Puml https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master
+' !if %variable_exists("RELATIVE_INCLUDE")
+'   !include %get_variable_value("RELATIVE_INCLUDE")/components
+' !else
+   !define BPD https://raw.githubusercontent.com/Projects-Kranio/bpd-architecture-plantuml-components/main/components
+' !endif
 
 !includeurl BPD/general/foo.puml
 !includeurl BPD/general/api.puml
@@ -33,7 +36,7 @@
 'left to right direction
 'top to bottom direction
 
-skinparam shadowing false
+'skinparam shadowing false
 ' skinparam rectangle {
 '     roundCorner 5
 '     BackgroundColor white
@@ -44,7 +47,8 @@ title Example Components
 
 Boundary(test1, "Openshift test1", "10.0.0.3", "desc")
 Boundary(test2, "Openshift test2", "10.0.0.3", "desc")
-test1 -[#0000FF]RIGHT-> test2
+'dtest1 -->> test2 : "test"
+Line(test1, test2, "")
 
 rectangle "==Test Rectangle" <<boundary>> as UC1
 UC1 -[#0000FF]LEFT->Bob : ok
