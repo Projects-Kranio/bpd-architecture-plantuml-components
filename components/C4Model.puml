@@ -232,22 +232,22 @@ rectangle "$getBoundary($label, $sub_title, $descr)" <<boundary>> as $alias $get
 !endfunction
 
 !function $getRel($direction, $alias1, $alias2, $label, $techn, $descr, $sprite, $tags, $link)
-  !$sprite = $toRelArg($sprite, $tags, "RelTagSprite")
-  !$techn = $toRelArg($techn, $tags, "RelTagTechn")
+  ' !$sprite = $toRelArg($sprite, $tags, "RelTagSprite")
+  ' !$techn = $toRelArg($techn, $tags, "RelTagTechn")
   !$rel = $alias1 + ' ' + $direction + ' ' + $alias2
-  !if ($tags != "")
-    !$rel = $rel + ' ' + $toStereos($tags)
-  !endif
-  !$rel = $rel + ' : '
-  !if ($link != "")
-    !$rel = $rel + '**[[' + $link + ' '
-  !endif
-  !if ($sprite != "")
-    !$rel = $rel + $getSprite($sprite)
-    !if ($label != "")
-      !$rel = $rel + ' '
-    !endif
-  !endif
+  ' !if ($tags != "")
+  '   !$rel = $rel + ' ' + $toStereos($tags)
+  ' !endif
+  ' !$rel = $rel + ' : '
+  ' !if ($link != "")
+  '   !$rel = $rel + '**[[' + $link + ' '
+  ' !endif
+  ' !if ($sprite != "")
+  '   !$rel = $rel + $getSprite($sprite)
+  '   !if ($label != "")
+  '     !$rel = $rel + ' '
+  '   !endif
+  ' !endif
   !if ($link != "")
     !$usedNewLine = ']]**\n**[[' + $link + ' '
     ' if sprite and label is empty than the link url is shown (otherwise link cannot be activated at all)
@@ -260,19 +260,19 @@ rectangle "$getBoundary($label, $sub_title, $descr)" <<boundary>> as $alias $get
       !$rel = $rel + '<size:0>.</size>'
     !endif
   !endif
-  !if ($techn != "")
-    ' line break is not deterministic, calculate it
-    !$rel = $rel + '\n//<size:' + $TECHN_FONT_SIZE + '>[' + $breakTechn($techn, $REL_TECHN_MAX_CHAR_WIDTH) + ']</size>//'
-  !endif
-  !if ($descr != "")
-    ' line break is not deterministic, calculate it
-    !$rel = $rel + '\n\n' + $breakDescr($descr, $REL_DESCR_MAX_CHAR_WIDTH)
-  !endif
-  !$prop = $getProps()
-  !if ($prop != "")
-    ' reuse table
-    !$rel = $rel + $prop
-  !endif
+  ' !if ($techn != "")
+  '   ' line break is not deterministic, calculate it
+  '   !$rel = $rel + '\n//<size:' + $TECHN_FONT_SIZE + '>[' + $breakTechn($techn, $REL_TECHN_MAX_CHAR_WIDTH) + ']</size>//'
+  ' !endif
+  ' !if ($descr != "")
+  '   ' line break is not deterministic, calculate it
+  '   !$rel = $rel + '\n\n' + $breakDescr($descr, $REL_DESCR_MAX_CHAR_WIDTH)
+  ' !endif
+  ' !$prop = $getProps()
+  ' !if ($prop != "")
+  '   ' reuse table
+  '   !$rel = $rel + $prop
+  ' !endif
   !return $rel
 !endfunction
 
