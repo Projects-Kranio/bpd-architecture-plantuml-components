@@ -108,8 +108,6 @@ rectangle "$getBoundary($label, $sub_title, $descr)" <<boundary>> as $alias $get
 ' ------------------------------ LINE ------------------------------
 ' ------------------------------------------------------------------
 
-' !global $propTable = ""
-
 !$LINE_TYPE_SOLID = plain
 !$LINE_TYPE_DASHED = dashed
 !$LINE_TYPE_DOTTED = dotted
@@ -137,162 +135,33 @@ rectangle "$getBoundary($label, $sub_title, $descr)" <<boundary>> as $alias $get
 !$LINE_DIRECTION_DOWN = DOWN
 !$LINE_DIRECTION_UP = UP
 
-' !$REL_TECHN_MAX_CHAR_WIDTH ?= 35
-' !$REL_DESCR_MAX_CHAR_WIDTH ?= 32
-
 !$COLOR_DEFAULT_LINE = COLOR_GRAY
 
-' !$lastIndex = 0
-' !$index = 1
-
-' !function Index($offset=1)
-'   !$lastIndex = $index
-'   !$index = $lastIndex + $offset
-'   !return $lastIndex
-' !endfunction
-
-' !unquoted function $getPrefix($index)
-'   !if ($index == "")
-'     !$pre = Index() + ": "
-'   !else
-'     !$pre = $index + ": "
-'   !endif
-'   !return $pre
-' !endfunction
-
-' !unquoted function $toRelArg($arg, $tags, $varPostfix)
-'   !if ($arg > "")
-'     !return $arg
-'   !endif
-
-'   !if (%strlen($tags) == 0)
-'        !return $arg
-'   !endif
-'   !$brPos = %strpos($tags, "+")
-'   !while ($brPos >= 0)
-'     !$tag = %substr($tags, 0, $brPos)
-'     !$newArg = %get_variable_value("$" + $tag + $varPostfix)
-'     !if ($newArg > "")
-'        !return $newArg
-'     !endif
-'     !$tags = %substr($tags, $brPos+1)
-'     !$brPos = %strpos($tags, "+")
-'   !endwhile
-'   !if (%strlen($tags) > 0)
-'     !$newArg = %get_variable_value("$" + $tags + $varPostfix)
-'     !if ($newArg > "")
-'        !return $newArg
-'     !endif
-'   !endif
-'   !return $arg
-' !endfunction
-
-' !unquoted function $toStereos($tags)
-'   !if (%strlen($tags) == 0)
-'     !return ''
-'   !endif
-'   !$stereos = ''
-'   !$brPos = %strpos($tags, "+")
-'   !while ($brPos >= 0)
-'     !$tag = %substr($tags, 0, $brPos)
-'     !$stereos = $stereos + '<<' + $tag + '>>'
-' %set_variable_value("$" + $tag + "_LineLegend", %true())
-'     !$tags = %substr($tags, $brPos+1)
-'     !$brPos = %strpos($tags, "+")
-'   !endwhile
-'   !if (%strlen($tags) > 0)
-'     !$stereos = $stereos + '<<' + $tags + '>>'
-' %set_variable_value("$" + $tags + "_LineLegend", %true())
-'   !endif
-'   !return $stereos
-' !endfunction
-
-' !unquoted function $breakTechn($text, $widthStr)
-'   !$usedNewLine = '</size>//\n//<size:'+$TECHN_FONT_SIZE+'>'
-'   !return $breakText($text, $usedNewLine, $widthStr)
-' !endfunction
-
-' format sprite that it can be used in diagram
-' !function $getSprite($sprite)
-'   !if (%substr($sprite, 0, 1) != "&" && %substr($sprite, 0, 4) != "img:")
-'     !$formatted = "<$" + $sprite + ">"
-'   !else
-'     !$formatted = "<" + $sprite + ">"
-'   !endif
-'   !return $formatted
-' !endfunction
-
-' !unquoted function $getProps($alignedNL = "\n")
-'   !if ($propTable != "")
-'     !$retTable = $alignedNL + $propTable
-'     !$propTable = ""
-'     !return $retTable
-'   !endif
-'   !return ""
-' !endfunction
-
-!function $getRel($direction, $alias1, $alias2, $label, $techn, $descr, $sprite, $tags, $link)
-  ' !$sprite = $toRelArg($sprite, $tags, "RelTagSprite")
-  ' !$techn = $toRelArg($techn, $tags, "RelTagTechn")
-  !$rel = $alias1 + ' ' + $direction + ' ' + $alias2
-  ' !if ($tags != "")
-  '   !$rel = $rel + ' ' + $toStereos($tags)
-  ' !endif
-  ' !$rel = $rel + ' : '
-  ' !if ($link != "")
-  '   !$rel = $rel + '**[[' + $link + ' '
-  ' !endif
-  ' !if ($sprite != "")
-  '   !$rel = $rel + $getSprite($sprite)
-  '   !if ($label != "")
-  '     !$rel = $rel + ' '
-  '   !endif
-  ' !endif
-  ' !if ($link != "")
-  '   !$usedNewLine = ']]**\n**[[' + $link + ' '
-  '   ' if sprite and label is empty than the link url is shown (otherwise link cannot be activated at all)
-  '   !$rel = $rel + $breakText($label, $usedNewLine) + ']]**'
-  ' !else
-  '   !if ($label != "")
-  '     !$usedNewLine = '**\n**'
-  '     !$rel = $rel + '**' + $breakText($label, $usedNewLine) + '**'
-  '   !else
-  '     !$rel = $rel + '<size:0>.</size>'
-  '   !endif
-  ' !endif
-  ' !if ($techn != "")
-  '   ' line break is not deterministic, calculate it
-  '   !$rel = $rel + '\n//<size:' + $TECHN_FONT_SIZE + '>[' + $breakTechn($techn, $REL_TECHN_MAX_CHAR_WIDTH) + ']</size>//'
-  ' !endif
-  ' !if ($descr != "")
-  '   ' line break is not deterministic, calculate it
-  '   !$rel = $rel + '\n\n' + $breakDescr($descr, $REL_DESCR_MAX_CHAR_WIDTH)
-  ' !endif
-  ' !$prop = $getProps()
-  ' !if ($prop != "")
-  '   ' reuse table
-  '   !$rel = $rel + $prop
-  ' !endif
+!function $getRel($direction, $alias1, $alias2, $label, $labelFrom, $labelTo)
+  !$rel = $alias1 + ' ' + "$labelFrom" + ' ' + $direction + ' ' + "$labelTo" + ' ' + $alias2 : $label
   !return $rel
 !endfunction
 
-' !unquoted function $getDirection($index, $tipLineFrom, $tipLineTo, $bidirectional=false, $typeLine=$LINE_TYPE_SOLID, $color=$COLOR_DEFAULT_LINE, $size=$LINE_SIZE_DEFAULT, $direction=$LINE_DIRECTION_RIGHT)
-'   !if ($index == "")
-'     !$pre = Index() + ": "
-'   !else
-'     !$pre = $index + ": "
-'   !endif
-'   !return $pre
-' !endfunction
+!unquoted function $getDirection($tipLineFrom, $tipLineTo, $bidirectional, $typeLine, $color, $size, $direction)
+  !$result = ""
+  !$defaultTipLineFrom = ""
 
-!unquoted procedure Line($from, $to, $label, $techn="", $descr="", $sprite="", $tags="", $link="")
-'!$pre = $getPrefix($index)
-'$pre + $label
-$getRel("-->>", $from, $to, $label, $techn, $descr, $sprite, $tags, $link)
-!endprocedure
+  !if ($bidirectional == "true")
+    !if ($tipLineFrom != "")
+      !$defaultTipLineFrom = $tipLineFrom
+    !else
+      !$defaultTipLineFrom = $tipLineTo
+    !endif
+  !endif
 
-!unquoted procedure Rel_D($from, $to, $label, $techn="", $descr="", $sprite="", $tags="", $link="")
-$getRel("-->>", $from, $to, $label, $techn, $descr, $sprite, $tags, $link)
+  !$result = $defaultTipLineFrom-[$color,$typeLine,thickness=$size]$direction-$tipLineTo
+
+  !return $result
+!endfunction
+
+!unquoted procedure Line($from, $to, $label, $direction=$LINE_DIRECTION_RIGHT, $bidirectional=false, $labelFrom="", $labelTo="", $typeLine=$LINE_TYPE_SOLID, $color=$COLOR_DEFAULT_LINE, $size=$LINE_SIZE_DEFAULT)
+!$preDirection = $getDirection($tipLineFrom, $tipLineTo, $bidirectional, $typeLine, $color, $size, $direction)
+$getRel($preDirection, $from, $to, $label, $labelFrom, $labelTo)
 !endprocedure
 
 @enduml
