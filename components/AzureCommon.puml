@@ -7,6 +7,7 @@
 !define AZURE_BG_COLOR #FFFFFF
 !define AZURE_BORDER_COLOR #3C7FC0
 !define AZURE_SYMBOL_COLOR AZURE_COLOR
+!define COLOR_DEFAULT_COMPONENTS #c60043
 
 ' Styling
 ' ##################################
