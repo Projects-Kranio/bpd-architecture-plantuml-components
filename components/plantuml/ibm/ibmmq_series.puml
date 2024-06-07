@@ -32,7 +32,7 @@ _________________________7NdeefggggffeWdN7________________________
 __________________________________________________________________
 }
 
-!define ibmmq_series(e_alias, e_label, e_techn) AzureEntity(e_alias, e_label, e_techn, COLOR_DEFAULT_COMPONENTS, api, api)
-!define ibmmq_series(e_alias, e_label, e_techn, e_descr) AzureEntity(e_alias, e_label, e_techn, e_descr, COLOR_DEFAULT_COMPONENTS, api, api)
-!define ibmmq_series(e_alias, e_label, e_techn, e_descr, e_color) AzureEntity(e_alias, e_label, e_techn, e_descr, e_color, api, api)
+!define ibmmq_series(e_alias, e_label, e_techn) AzureEntity(e_alias, e_label, e_techn, COLOR_DEFAULT_COMPONENTS, ibmmq_series, ibmmq_series)
+!define ibmmq_series(e_alias, e_label, e_techn, e_descr) AzureEntity(e_alias, e_label, e_techn, e_descr, COLOR_DEFAULT_COMPONENTS, ibmmq_series, ibmmq_series)
+!define ibmmq_series(e_alias, e_label, e_techn, e_descr, e_color) AzureEntity(e_alias, e_label, e_techn, e_descr, e_color, ibmmq_series, ibmmq_series)
 @enduml

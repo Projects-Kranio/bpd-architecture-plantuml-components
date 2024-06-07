@@ -34,7 +34,7 @@ aSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSa
 ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ
 }
 
-!define microservice(e_alias, e_label, e_techn) AzureEntity(e_alias, e_label, e_techn, COLOR_DEFAULT_COMPONENTS, api, api)
-!define microservice(e_alias, e_label, e_techn, e_descr) AzureEntity(e_alias, e_label, e_techn, e_descr, COLOR_DEFAULT_COMPONENTS, api, api)
-!define microservice(e_alias, e_label, e_techn, e_descr, e_color) AzureEntity(e_alias, e_label, e_techn, e_descr, e_color, api, api)
+!define microservice(e_alias, e_label, e_techn) AzureEntity(e_alias, e_label, e_techn, COLOR_DEFAULT_COMPONENTS, microservice, microservice)
+!define microservice(e_alias, e_label, e_techn, e_descr) AzureEntity(e_alias, e_label, e_techn, e_descr, COLOR_DEFAULT_COMPONENTS, microservice, microservice)
+!define microservice(e_alias, e_label, e_techn, e_descr, e_color) AzureEntity(e_alias, e_label, e_techn, e_descr, e_color, microservice, microservice)
 @enduml

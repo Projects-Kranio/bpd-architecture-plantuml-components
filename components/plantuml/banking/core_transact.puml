@@ -42,7 +42,7 @@ ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
 ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
 }
 
-!define core_transact(e_alias, e_label, e_techn) AzureEntity(e_alias, e_label, e_techn, COLOR_DEFAULT_COMPONENTS, api, api)
-!define core_transact(e_alias, e_label, e_techn, e_descr) AzureEntity(e_alias, e_label, e_techn, e_descr, COLOR_DEFAULT_COMPONENTS, api, api)
-!define core_transact(e_alias, e_label, e_techn, e_descr, e_color) AzureEntity(e_alias, e_label, e_techn, e_descr, e_color, api, api)
+!define core_transact(e_alias, e_label, e_techn) AzureEntity(e_alias, e_label, e_techn, COLOR_DEFAULT_COMPONENTS, core_transact, core_transact)
+!define core_transact(e_alias, e_label, e_techn, e_descr) AzureEntity(e_alias, e_label, e_techn, e_descr, COLOR_DEFAULT_COMPONENTS, core_transact, core_transact)
+!define core_transact(e_alias, e_label, e_techn, e_descr, e_color) AzureEntity(e_alias, e_label, e_techn, e_descr, e_color, core_transact, core_transact)
 @enduml

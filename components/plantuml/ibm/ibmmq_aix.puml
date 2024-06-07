@@ -34,7 +34,7 @@ ___________________GIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII7_____________________
 _________________________FFFF7______________77777777__________________________
 }
 
-!define ibmmq_aix(e_alias, e_label, e_techn) AzureEntity(e_alias, e_label, e_techn, COLOR_DEFAULT_COMPONENTS, api, api)
-!define ibmmq_aix(e_alias, e_label, e_techn, e_descr) AzureEntity(e_alias, e_label, e_techn, e_descr, COLOR_DEFAULT_COMPONENTS, api, api)
-!define ibmmq_aix(e_alias, e_label, e_techn, e_descr, e_color) AzureEntity(e_alias, e_label, e_techn, e_descr, e_color, api, api)
+!define ibmmq_aix(e_alias, e_label, e_techn) AzureEntity(e_alias, e_label, e_techn, COLOR_DEFAULT_COMPONENTS, ibmmq_aix, ibmmq_aix)
+!define ibmmq_aix(e_alias, e_label, e_techn, e_descr) AzureEntity(e_alias, e_label, e_techn, e_descr, COLOR_DEFAULT_COMPONENTS, ibmmq_aix, ibmmq_aix)
+!define ibmmq_aix(e_alias, e_label, e_techn, e_descr, e_color) AzureEntity(e_alias, e_label, e_techn, e_descr, e_color, ibmmq_aix, ibmmq_aix)
 @enduml
