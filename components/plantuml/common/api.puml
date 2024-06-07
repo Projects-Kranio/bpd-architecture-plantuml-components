@@ -41,9 +41,10 @@ sprite $api [92x77/8] {
   00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 }
 
-!define _COLOR #e58315
+!define _COLOR #c60043
 'e58315 --Orange
 '0072C6 --Blue
+'c60043 --red
 
 !define api(e_alias, e_label, e_techn) AzureEntity(e_alias, e_label, e_techn, _COLOR, api, api)
 !define api(e_alias, e_label, e_techn, e_descr) AzureEntity(e_alias, e_label, e_techn, e_descr, _COLOR, api, api)
