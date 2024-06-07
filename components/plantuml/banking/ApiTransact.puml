@@ -1,5 +1,5 @@
 @startuml
-sprite $api_transact [60x60/8] {
+sprite $ApiTransact [60x60/8] {
 _________________--ssssssssssssssssssssss--_________________
 ______________-ssssssssssssssssssssssssssssss-______________
 ___________-ssssssssssssssssssssssssssssssssssss-___________
@@ -32,7 +32,7 @@ _______________ttsssssssssssssssssssssssssstt_______________
 ___________________tttssssssssssssssssttt___________________
 }
 
-!define api_transact(e_alias, e_label, e_techn) AzureEntity(e_alias, e_label, e_techn, COLOR_DEFAULT_COMPONENTS, api, api)
-!define api_transact(e_alias, e_label, e_techn, e_descr) AzureEntity(e_alias, e_label, e_techn, e_descr, COLOR_DEFAULT_COMPONENTS, api, api)
-!define api_transact(e_alias, e_label, e_techn, e_descr, e_color) AzureEntity(e_alias, e_label, e_techn, e_descr, e_color, api, api)
+!define ApiTransact(e_alias, e_label, e_techn) AzureEntity(e_alias, e_label, e_techn, COLOR_DEFAULT_COMPONENTS, api, api)
+!define ApiTransact(e_alias, e_label, e_techn, e_descr) AzureEntity(e_alias, e_label, e_techn, e_descr, COLOR_DEFAULT_COMPONENTS, api, api)
+!define ApiTransact(e_alias, e_label, e_techn, e_descr, e_color) AzureEntity(e_alias, e_label, e_techn, e_descr, e_color, api, api)
 @enduml
