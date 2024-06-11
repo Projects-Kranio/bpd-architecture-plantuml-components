@@ -4,8 +4,8 @@
     !define BPD https://raw.githubusercontent.com/Projects-Kranio/bpd-architecture-plantuml-components/main/components
     !define C4Puml https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master
 
-    !includeurl BPD/general/foo.puml
-    !includeurl BPD/general/api.puml
+    !includeurl BPD/plantuml/common/foo.puml
+    !includeurl BPD/plantuml/common/api.puml
     !includeurl BPD/AzureCommon.puml
     !includeurl C4Puml/C4_Context.puml
     !includeurl C4Puml/C4_Component.puml
